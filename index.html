@@ -236,7 +236,7 @@
           </div>
 
           <div class="full">
-            <label>Upload Payment Proof Screenshot</label>
+            <label>Upload Payment Screenshot</label>
             <input id="proof" type="file" accept="image/*" required />
             <div class="preview" id="fileInfo"></div>
           </div>
@@ -335,7 +335,7 @@
     const proofFile = document.getElementById("proof").files[0];
 
     if (!proofFile) {
-      status.textContent = "Please upload payment proof screenshot.";
+      status.textContent = "Please upload Payment Screenshot.";
       status.classList.add("err");
       return;
     }
@@ -412,3 +412,4 @@
 </body>
 
 </html>
+
