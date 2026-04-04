@@ -92,7 +92,7 @@
 
     .row {
       display: grid;
-      grid-template-columns: 34px 1fr 120px;
+      grid-template-columns: 34px 1fr 140px;
       gap: 10px;
       align-items: center;
       padding: 10px 12px;
@@ -241,8 +241,8 @@
           </div>
 
           <div class="row">
-            <input class="activity-check" type="checkbox" id="origami" />
-            <div>Origami</div>
+            <input class="activity-check" type="checkbox" id="paperCrafting" />
+            <div>Paper Crafting</div>
             <div class="price">600</div>
           </div>
 
@@ -282,18 +282,18 @@
 </div>
 
 <script>
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyQ8KcNcpikkpKe5QAiEP04OerNXTWwcbdSbJB9f1PVlRgVuYxlCHZ8wDzbBBVmWGLX/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwtuSSl7AfNbN4fgNp-_UvFLMw4fkty4w602-QTVSfkLT-YJvSCks1ASMrb_gRlUXoJ6g/exec";
 
   const prices = {
     painting: 1000,
     sketching: 300,
-    origami: 600,
+    paperCrafting: 600,
     calligraphy: 500
   };
 
   const paintingEl = document.getElementById("painting");
   const sketchingEl = document.getElementById("sketching");
-  const origamiEl = document.getElementById("origami");
+  const paperCraftingEl = document.getElementById("paperCrafting");
   const calligraphyEl = document.getElementById("calligraphy");
 
   const totalEl = document.getElementById("total");
@@ -303,7 +303,7 @@
   const statusEl = document.getElementById("status");
   const submitBtnEl = document.getElementById("submitBtn");
 
-  [paintingEl, sketchingEl, origamiEl, calligraphyEl].forEach((el) => {
+  [paintingEl, sketchingEl, paperCraftingEl, calligraphyEl].forEach((el) => {
     el.addEventListener("change", updateTotal);
   });
 
@@ -317,7 +317,7 @@
 
     if (paintingEl.checked) total += prices.painting;
     if (sketchingEl.checked) total += prices.sketching;
-    if (origamiEl.checked) total += prices.origami;
+    if (paperCraftingEl.checked) total += prices.paperCrafting;
     if (calligraphyEl.checked) total += prices.calligraphy;
 
     totalEl.textContent = total;
@@ -341,7 +341,7 @@
     const selectedAny =
       paintingEl.checked ||
       sketchingEl.checked ||
-      origamiEl.checked ||
+      paperCraftingEl.checked ||
       calligraphyEl.checked;
 
     if (!selectedAny) {
@@ -377,7 +377,7 @@
         gmail: document.getElementById("gmail").value.trim(),
         painting: paintingEl.checked,
         sketching: sketchingEl.checked,
-        origami: origamiEl.checked,
+        paperCrafting: paperCraftingEl.checked,
         calligraphy: calligraphyEl.checked,
         total: Number(totalEl.textContent),
         proofFilename: proofFile.name,
