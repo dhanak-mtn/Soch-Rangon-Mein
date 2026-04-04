@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Event Participation Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f7fb;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .wrapper {
+      max-width: 1180px;
+      margin: auto;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      flex: 1 1 820px;
+      max-width: 820px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.08);
+    }
+
+    .sideNote {
+      flex: 0 0 300px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.08);
+      border-left: 5px solid #2563eb;
+    }
+
+    .sideNote h2 {
+      margin-top: 0;
+      font-size: 20px;
+      color: #111827;
+    }
+
+    .sideNote p {
+      margin: 10px 0;
+      color: #374151;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    h1 { margin: 0 0 10px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    label {
+      font-size: 13px;
+      color: #333;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .full { grid-column: 1 / -1; }
+
+    .items {
+      margin-top: 14px;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 34px 1fr 120px;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 12px;
+      border-top: 1px solid #f1f1f1;
+    }
+
+    .row:first-child {
+      border-top: none;
+      background: #fafafa;
+      font-weight: 600;
+    }
+
+    .price { text-align: right; }
+
+    .totalBox {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      padding: 12px;
+      background: #f8fafc;
+      border: 1px dashed #d7e2ff;
+      border-radius: 12px;
+    }
+
+    .btn {
+      margin-top: 14px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      background: #2563eb;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .btn:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    .note {
+      font-size: 12px;
+      color: #666;
+      margin-top: 10px;
+    }
+
+    .status {
+      margin-top: 12px;
+      font-size: 13px;
+    }
+
+    .ok { color: #0f766e; }
+    .err { color: #b91c1c; }
+
+    .preview {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #444;
+    }
+
+    @media (max-width: 900px) {
+      .wrapper {
+        flex-direction: column;
+      }
+
+      .sideNote, .card {
+        max-width: 100%;
+        width: 100%;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+<div class="card">
+<h1>Participation Registration</h1>
+<p class="note">Fill details, choose activities, upload payment proof screenshot, then submit. Total updates automatically.</p>
+
+<form id="form">
+<div class="grid">
+
+<div>
+<label>Name</label>
+<input id="name" required placeholder="Your name" />
+</div>
+
+<div>
+<label>Class</label>
+<input id="className" required placeholder="e.g., 9th / BSCS-4" />
+</div>
+
+<div>
+<label>Roll Number</label>
+<input id="rollNo" required placeholder="e.g., 23-CS-101" />
+</div>
+
+<div>
+<label>Phone Number</label>
+<input id="phone" required placeholder="03xx-xxxxxxx" />
+</div>
+
+<div class="full">
+<label>Gmail</label>
+<input id="gmail" type="email" required placeholder="example@gmail.com" />
+</div>
+
+<div class="full items">
+<div class="row">
+<div></div>
+<div>Activity</div>
+<div class="price">Price (PKR)</div>
+</div>
+
+<div class="row">
+<input type="checkbox" id="painting" />
+<div>Painting</div>
+<div class="price" id="paintingPrice"></div>
+</div>
+
+<div class="row">
+<input type="checkbox" id="sketching" />
+<div>Sketching</div>
+<div class="price" id="sketchingPrice"></div>
+</div>
+
+<div class="row">
+<input type="checkbox" id="crafting" />
+<div>Crafting</div>
+<div class="price" id="craftingPrice"></div>
+</div>
+
+<div class="row">
+<input type="checkbox" id="calligraphy" />
+<div>Calligraphy</div>
+<div class="price" id="calligraphyPrice"></div>
+</div>
+</div>
+
+<div class="full totalBox">
+<strong>Total Bill</strong>
+<strong>Rs <span id="total">0</span></strong>
+</div>
+
+<div class="full">
+<label>Upload Payment Proof Screenshot</label>
+<input id="proof" type="file" accept="image/*" required />
+<div class="preview" id="fileInfo"></div>
+</div>
+
+<button class="btn full" id="submitBtn" type="submit">Submit Registration</button>
+
+<div class="status full" id="status"></div>
+
+</div>
+</form>
+</div>
+
+<div class="sideNote">
+<h2>Pay Your Bills Here</h2>
+<p><strong>Account Holder Name:</strong> Zohazin Abbasi</p>
+<p><strong>Wallet Name:</strong> JazzCash</p>
+<p><strong>Account Number:</strong> 03114911149</p>
+</div>
+
+</div>
+
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzfdH3sC_WkuggPspd29n1VevtGH0sbNMqFQNfmBSuMx8nNt5rmD1nhLlCWqaKDjWr66Q/exec";
+
+const prices = {
+painting: 1000,
+sketching: 300,
+crafting: 600,
+calligraphy: 500
+};
+
+document.getElementById("paintingPrice").textContent = prices.painting;
+document.getElementById("sketchingPrice").textContent = prices.sketching;
+document.getElementById("craftingPrice").textContent = prices.crafting;
+document.getElementById("calligraphyPrice").textContent = prices.calligraphy;
+
+["painting","sketching","crafting","calligraphy"].forEach(id => {
+document.getElementById(id).addEventListener("change", updateTotal);
+});
+
+document.getElementById("proof").addEventListener("change", (e) => {
+const f = e.target.files[0];
+document.getElementById("fileInfo").textContent = f ? `Selected: ${f.name}` : "";
+});
+
+updateTotal();
+
+function updateTotal(){
+let total = 0;
+if (painting.checked) total += prices.painting;
+if (sketching.checked) total += prices.sketching;
+if (crafting.checked) total += prices.crafting;
+if (calligraphy.checked) total += prices.calligraphy;
+document.getElementById("total").textContent = total;
+}
+</script>
+
+</body>
+</html>
